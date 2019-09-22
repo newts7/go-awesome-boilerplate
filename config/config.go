@@ -8,6 +8,10 @@ type Confuguration struct {
 	Server struct {
 		Port string
 	}
+	Database struct{
+		Uri string
+		Database string
+	}
 }
 var config Confuguration
 
