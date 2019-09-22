@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"goBoilerPlate/config"
 	"goBoilerPlate/db"
+	"goBoilerPlate/server"
 	"os"
 )
 
@@ -22,4 +23,5 @@ func main(){
 	fmt.Println("Setting Environment to ", environment)
 	config.Init(environment)
 	db.Init()
+	server.Init()
 }
