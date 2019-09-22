@@ -1,0 +1,23 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "{{.Description}}",
+        "title": "Swagger Example API",
+        "contact": {},
+        "license": {},
+        "version": "{{.Version}}"
+    },
+    "host": "{{.Host}}",
+    "basePath": "{{.BasePath}}",
+    "paths": {
+        "/hello": {
+            "get": {
+                "description": "Check if Swaager Working",
+                "summary": "Check if swagger working",
+                "responses": {
+                    "200": {}
+                }
+            }
+        }
+    }
+}

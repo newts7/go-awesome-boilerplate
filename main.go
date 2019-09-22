@@ -6,6 +6,7 @@ import (
 	"goBoilerPlate/db"
 	"goBoilerPlate/server"
 	"os"
+	
 )
 
 var environment string
@@ -17,7 +18,7 @@ func setEnviroment()  {
 		os.Exit(1)
 	}
 }
-
+// @title Swagger Example API
 func main(){
 	setEnviroment()
 	fmt.Println("Setting Environment to ", environment)

@@ -1,0 +1,16 @@
+basePath: '{{.BasePath}}'
+host: '{{.Host}}'
+info:
+  contact: {}
+  description: '{{.Description}}'
+  license: {}
+  title: Swagger Example API
+  version: '{{.Version}}'
+paths:
+  /hello:
+    get:
+      description: Check if Swaager Working
+      responses:
+        "200": {}
+      summary: Check if swagger working
+swagger: "2.0"
