@@ -6,6 +6,7 @@ import (
 	ginSwagger "github.com/swaggo/gin-swagger"
 	"goBoilerPlate/config"
 	"goBoilerPlate/controllers"
+	"goBoilerPlate/middlewares"
 )
 
 func NewRouter()*gin.Engine{
@@ -14,6 +15,7 @@ func NewRouter()*gin.Engine{
 	router := gin.New()
 	router.Use(gin.Logger())
 	router.Use(gin.Recovery())
+	router.Use(middlewares.Cors())
 
 	/* Swaager Integration */
 	swaggerUrl := ginSwagger.URL("http://localhost:"+config.GetConfig().Server.Port+"/swagger/doc.json")
