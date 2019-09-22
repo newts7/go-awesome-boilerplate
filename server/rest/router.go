@@ -16,7 +16,7 @@ func NewRouter()*gin.Engine{
 	router.Use(gin.Logger())
 	router.Use(gin.Recovery())
 	router.Use(middlewares.Cors())
-
+	router.Use(middlewares.AccessLogger())
 	/* Swaager Integration */
 	swaggerUrl := ginSwagger.URL("http://localhost:"+config.GetConfig().Server.Port+"/swagger/doc.json")
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, swaggerUrl))

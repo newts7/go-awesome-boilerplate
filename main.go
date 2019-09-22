@@ -23,7 +23,7 @@ func setEnviroment()  {
 func main(){
 	setEnviroment()
 	config.Init(environment)
-	logger.Init()
+	logger.Init("application", logger.LogH)
 	fmt.Println(logger.LogH.GetLevel())
 	logger.LogH.WithField("environment", environment).Info("Setting Environment")
 	db.Init()

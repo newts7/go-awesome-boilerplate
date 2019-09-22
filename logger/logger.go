@@ -34,7 +34,7 @@ func (h *DefaultFieldHook) Fire(e *logrus.Entry) error {
 	}
 	return nil
 }
-func Init(){
+func Init(loggerType string,logger *logrus.Logger){
 	logLevels := map[string] logrus.Level {
 		"PANIC": logrus.PanicLevel,
 		"FATAL": logrus.FatalLevel,
@@ -46,13 +46,13 @@ func Init(){
 	env := os.Getenv("environment")
 	loggingConfiguration := config.GetConfig().Logging
 
-	LogH.SetReportCaller(true)
-	LogH.SetLevel(logLevels[loggingConfiguration.Level])
-	LogH.AddHook(&DefaultFieldHook{})
+	logger.SetReportCaller(true)
+	logger.SetLevel(logLevels[loggingConfiguration.Level])
+	logger.AddHook(&DefaultFieldHook{})
 	if loggingConfiguration.StdoutLoggingEnable == false{
-		LogH.Out = ioutil.Discard
+		logger.Out = ioutil.Discard
 	}
-	infoLogPath  := loggingConfiguration.AppName+"-"+env+"-info"
+	infoLogPath  := loggingConfiguration.AppName+"-"+env+"-"+loggerType+"-info"
 	infoLogWriter, _ := rotatelogs.New(
 		infoLogPath+"-%Y-%m-%d"+ ".log",
 		rotatelogs.WithLinkName(infoLogPath+".log"),
@@ -61,7 +61,7 @@ func Init(){
 		rotatelogs.WithRotationTime(time.Duration(24)*time.Hour),
 	)
 
-	errorLogPath := loggingConfiguration.AppName+"-"+env+"-error"
+	errorLogPath := loggingConfiguration.AppName+"-"+env+"-"+loggerType+"-error"
 	errorLogWriter, _ := rotatelogs.New(
 		errorLogPath+"-%Y-%m-%d"+".log",
 		rotatelogs.WithLinkName(errorLogPath+".log"),
@@ -72,7 +72,7 @@ func Init(){
 
 	switch  env {
 	case  "development":
-		LogH.AddHook(lfshook.NewHook(
+		logger.AddHook(lfshook.NewHook(
 			lfshook.WriterMap{
 				logrus.InfoLevel: infoLogWriter,
 				logrus.ErrorLevel: errorLogWriter,
@@ -84,7 +84,7 @@ func Init(){
 			},
 		))
 	case "test":
-		LogH.AddHook(lfshook.NewHook(
+		logger.AddHook(lfshook.NewHook(
 			lfshook.WriterMap{
 				logrus.InfoLevel: infoLogWriter,
 				logrus.ErrorLevel: errorLogWriter,
@@ -96,7 +96,7 @@ func Init(){
 			},
 		))
 	case "production":
-		LogH.AddHook(lfshook.NewHook(
+		logger.AddHook(lfshook.NewHook(
 			lfshook.WriterMap{
 				logrus.InfoLevel: infoLogWriter,
 				logrus.ErrorLevel: errorLogWriter,
