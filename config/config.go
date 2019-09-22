@@ -12,6 +12,11 @@ type Confuguration struct {
 		Uri string
 		Database string
 	}
+	Logging struct{
+		Level string
+		AppName string
+		StdoutLoggingEnable bool
+	}
 }
 var config Confuguration
 
@@ -25,7 +30,7 @@ func initDevConfig(){
 	}
 	err = viper.Unmarshal(&config)
 	if err != nil{
-		fmt.Println("Error in unmarshalling config file", err)
+
 		return
 	}
 }

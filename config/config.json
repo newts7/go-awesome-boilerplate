@@ -4,6 +4,11 @@
   },
   "database": {
     "uri": "mongodb://localhost:27017",
-    "database": "mydatabasex"
+    "database": "mydatabase"
+  },
+  "logging":{
+    "level": "DEBUG",
+    "appName": "myapp",
+    "stdoutLoggingEnable": false
   }
 }

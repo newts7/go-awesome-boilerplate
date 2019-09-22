@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"goBoilerPlate/config"
 	"goBoilerPlate/db"
+	"goBoilerPlate/logger"
 	"goBoilerPlate/server"
 	"os"
 	
@@ -21,8 +22,10 @@ func setEnviroment()  {
 // @title Swagger Example API
 func main(){
 	setEnviroment()
-	fmt.Println("Setting Environment to ", environment)
 	config.Init(environment)
+	logger.Init()
+	fmt.Println(logger.LogH.GetLevel())
+	logger.LogH.WithField("environment", environment).Info("Setting Environment")
 	db.Init()
 	server.Init()
 }
