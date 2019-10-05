@@ -1,0 +1,9 @@
+language: go
+go:
+  - 1.13.x
+install: skip
+env:
+  - environment=development
+script:
+  - echo "Starting travis ci test"
+  - go test main.go
