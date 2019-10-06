@@ -6,4 +6,22 @@ env:
   - environment=development
 script:
   - echo "Starting travis ci test"
-  - go test main.go
+  - zip -r latest *
+  - mkdir -p dpl_cd_upload
+  - mv latest.zip dpl_cd_upload/latest.zip
+deploy:
+  - provider: s3
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
+    bucket: $BUCKET
+    skip_cleanup: true
+    local_dir: dpl_cd_upload
+  - provider: codedeploy
+    region: us-east-2
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
+    bucket: $BUCKET
+    key: latest.zip
+    bundle_type: zip
+    application: $MY_APP
+    deployment_group: $MYDEPLOYMENTGROUP
