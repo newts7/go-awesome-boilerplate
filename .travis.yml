@@ -17,9 +17,9 @@ deploy:
     skip_cleanup: true
     local_dir: dpl_cd_upload
   - provider: codedeploy
-    region: us-east-2
     access_key_id: $AWS_ACCESS_KEY
     secret_access_key: $AWS_SECRET_KEY
+    region: $CODEDEPLOY_REGION
     bucket: $BUCKET
     key: latest.zip
     bundle_type: zip
