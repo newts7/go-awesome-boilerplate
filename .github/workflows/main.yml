@@ -1,16 +1,15 @@
-name: CI
+name: Docker Image CI
 
-on:
-  push:
-    branches: 
-      - master
+on: [push]
 
 jobs:
+
   build:
+
     runs-on: ubuntu-latest
+
     steps:
-       - uses: actions/checkout@master
-       - uses: actions/setup-go@v1
-         with:
-            go-version: '1.13' # The Go version to download (if necessary) and use.
-         - run: go run hello.go
+      - uses: actions/checkout@v1
+      - name: Build the Docker image
+        run: docker build . --f Dockerfile -t newts/myapp
+
