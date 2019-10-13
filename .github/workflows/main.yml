@@ -11,3 +11,4 @@ jobs:
     steps:
       - run: ls -la
       - run: pwd
+      - run: go test main.go
