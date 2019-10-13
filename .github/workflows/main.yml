@@ -10,3 +10,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: docker build -t newts/gooilerplate .
+
+
