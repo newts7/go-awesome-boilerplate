@@ -9,7 +9,4 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - run: |
-        docker build -t newts/gooilerplate .
-        ls -la
-
+      - run: ls -la
